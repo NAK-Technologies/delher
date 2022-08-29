@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 # /vendor
+/vendor_backup
+/vendor_backup2
