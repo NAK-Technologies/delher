@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UsersTableSeeder::class]);
+        $this->call([UsersTableSeeder::class, QuestionSeeder::class]);
 
         $json = File::get('public/storage/assets/pk.json');
         // $json = Storage::disk('local')->get(storage_path() . '/assets/pk.json');

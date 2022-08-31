@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Question;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class QuestionSeeder extends Seeder
 {
@@ -15,225 +16,124 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        $questions = [
-            [
-                'question' => 'Education',
-                'options' => json_encode(['illiterate', 'literate', 'school grad.', 'college/university grad.']),
-                'group' => 'demographics',
+        $groups = [
+            'presenting complaints' => [
+                'Primary Complaint' => ['sub' => ['loose stools', 'Diarrhea'], 'alias' => 'complaints'],
+                'Start Date' => ['sub' => ['date']],
+                'End Date' => ['sub' => ['date', 'ongoing']],
+                'Frequency' => ['sub' => ['1', '2', '3', '4', '5-10', '10-15', '15-20', '>20'], 'alias' => 'frequency'],
+                'Associated Complaints' => ['sub' => ['nausea', 'vomiting', 'abdominal pain', 'fever', 'alternate with constipation', 'incomplete evacuation', 'urge to pass stool', 'mouth ulcer', 'joint pain', 'rash', 'Other'], 'alias' => 'associated'],
+                'Amount of Stool' => ['sub' => ['small', 'normal', 'large'], 'alias' => 'amount'],
+                'Consistency' => ['sub' => ['watery', 'pasty'], 'alias' => 'consistency'],
+                'Contents' => ['sub' => ['blood', 'mucous', 'fat', 'difficult to flush'], 'alias' => 'contents'],
+                'Blood from any other site' => ['sub' => ['Yes', 'No'], 'alias' => ''],
+                'Lump in back passage' => ['sub' => ['Yes', 'No']],
             ],
-            [
-                'question' => 'Visit Type',
-                'options' => json_encode(['First-time', 'Follow-up', 'OPD', 'Emergency']),
-                'group' => 'demographics',
+            'past history' => [
+                'Past similar episode(s) of diarrhea' => ['sub' => ['Yes' => ['within 1 month', 'within 3 months', 'within 6 months', 'within 12 months', 'more than 12 months']], 'No', 'alias' => 'frequency'],
+                'How was the last episode' => ['sub' => ['serious', 'non-serious'], 'alias' => 'Severity'],
+                'Previous Hopitalization due to diarrhea' => ['sub' => ['Yes', 'No']],
             ],
-            [
-                'question' => 'Exclusively Breastfed',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'demographics',
+            'vaccination history' => [
+                'Vaccination history' => ['sub' => ['All completed', 'Rotavirus vaccine', 'measles vaccine'], 'alias' => 'Vaccination'],
             ],
-            [
-                'question' => 'Primary Complaint',
-                'options' => json_encode(['loose stools', 'Diarrhea']),
-                'group' => 'presenting complaints',
+            'lifestyle' => [
+                'Drinking water (home)' => ['sub' => ['Boiled', 'Unboiled',  'tap water', 'bottled water', 'RO water', 'other'], 'alias' => 'water'],
+                'Type of toilet' => ['sub' => ['western', 'eastern', 'forest', 'river/stream', 'digging hole'], 'alias' => 'toilet'],
+                'Suspected Food' => ['sub' => []],
+                'Regular soap use' => ['sub' => ['Yes', 'No'], 'alias' => 'soap use'],
+                'Animals at home' => ['sub' => ['Yes', 'No'], 'alias' => 'animals interaction'],
             ],
-            [
-                'question' => 'Start Date',
-                'options' => json_encode([]),
-                'group' => 'presenting complaints',
+            'systemic review' => [
+                'Systemic review' => ['sub' => ['not significant', 'significant']],
             ],
-            [
-                'question' => 'End Date',
-                'options' => json_encode([]),
-                'group' => 'presenting complaints',
+            'treatment history' => [
+                'Medications currently in use' => ['sub' => ['None', 'ORS', 'probiotic', 'zinc', 'Antibiotic'], 'alias' => 'medications'],
+                'Compliance to medicine' => ['sub' => ['As per doctors advice', 'Stopped medicine him/herself'], 'alias' => 'compliance'],
+                'Blood transfusion' => ['sub' => ['Yes', 'No'], 'alias' => 'transfusion'],
             ],
-            [
-                'question' => 'Frequency',
-                'options' => json_encode(['1', '2', '3', '4', '5-10', '10-15', '15-20', '>20']),
-                'group' => 'presenting complaints',
+            'travel history' => [
+                'Travel history' => ['sub' => ['local', 'international']],
             ],
-            [
-                'question' => 'Associated Complaints',
-                'options' => json_encode([
-                    'nausea', 'vomiting', 'abdominal pain', 'fever', 'alternate with constipation', 'incomplete evacuation', 'urge to pass stool', 'mouth ulcer', 'joint pain', 'rash', 'Other'
-                ]),
-                'group' => 'presenting complaints',
+            'family history' => [
+                'Family History' => ['sub' => ['no history', 'similar complaint in family']],
             ],
-            [
-                'question' => 'Amount of Stool',
-                'options' => json_encode(['small', 'normal', 'large']),
-                'group' => 'presenting complaints',
+            'diarrhea related examination' => [
+                'General' => ['sub' => ['Alert', 'Lethargic/Unconcious', 'restless/irritable', 'sunken eyes'], 'alias' => 'general'],
+                'Systemic infection signs' => ['sub' => ['Febrile', 'afebrile', 'other'], 'alias' => 'infection'],
+                'Abdominal / Perianal examination' => ['sub' => ['pain on palpation', 'distention', 'other'], 'alias' => 'examination'],
+                'Able to drink' => ['sub' => ['Eagerly', 'poorly or unable', 'normally'], 'alias' => 'able to drink'],
+                'Skin turgor' => ['sub' => ['Very slowly', 'slowly', 'immediately'], 'alias' => 'turgor'],
+                'Dehydration' => ['sub' => ['No dehydration', 'some dehydration', 'severe dehydration'], 'alias' => 'dehydration'],
             ],
-            [
-                'question' => 'Consistency',
-                'options' => json_encode(['watery', 'pasty']),
-                'group' => 'presenting complaints',
+            'laboratory history' => [
+                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => 'Ecoli', 'other organism']],
             ],
-            [
-                'question' => 'Contents',
-                'options' => json_encode(['blood', 'mucous', 'fat', 'difficult to flush']),
-                'group' => 'presenting complaints',
+            'final diagnosis' => [
+                'Final diagnosis' => ['sub' => ['Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea']],
             ],
-            [
-                'question' => 'Blood from any other site',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'presenting complaints',
+            'confirmation of diagnosis' => [
+                'Confirmation of diagnosis' => ['sub' => ['clinically confirmed', 'laboratory confirmed', 'epidemiologically confirmed']],
             ],
-            [
-                'question' => 'Lump in back passage',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'presenting complaints',
+            'differential diagnosis' => [
+                'Differential diagnosis' => ['sub' => ['Yes', 'No']],
             ],
-            [
-                'question' => 'Past similar episode(s) of diarrhea',
-                'options' => json_encode([
-                    'last_episode' => [
-                        'within 1 month', 'within 3 months', 'within 6 months', 'within 12 months', 'more than 12 months'
-                    ],
-                    'condition' => [
-                        'serious', 'non-serious'
-                    ]
-                ]),
-                'group' => 'past history',
+            'precription and lab advice' => [
+                'medicine' => ['sub' => ['name', 'strength', 'dose', 'duration', 'other']],
+                'labs' => ['sub' => ['CBC', 'UCE', 'LFT', 'PT', 'APTT', 'INR', 'Stook DR', 'Stool CS', 'Malaria', 'Dengue', 'Covid-19', 'other']],
             ],
-            [
-                'question' => 'Previous Hopitalization due to diarrhea',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'past history',
+            'follow-up advice' => [
+                'follow up' => ['sub' => ['after 1 week', 'after 2 weeks', 'after 1 month', 'Other' => 'date']],
             ],
-            [
-                'question' => 'Vaccination history',
-                'options' => json_encode(['All completed', 'Rotavirus vaccine', 'measles vaccine']),
-                'group' => 'vaccination history',
-            ],
-            [
-                'question' => 'Drinking water (home)',
-                'options' => json_encode([
-                    'Boiled, Unboiled',  'tap water', 'bottled water',
-                    'RO water', 'other source'
-                ]),
-                'group' => 'lifestyle',
-            ],
-            [
-                'question' => 'Type of latrine',
-                'options' => json_encode(['western', 'eastern', 'forest', 'river/stream', 'digging hole']),
-                'group' => 'lifestyle',
-            ],
-            [
-                'question' => 'Suspected Food',
-                'options' => json_encode([]),
-                'group' => 'lifestyle',
-            ],
-            [
-                'question' => 'Regular soap use',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'lifestyle',
-            ],
-            [
-                'question' => 'Animals at home',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'lifestyle',
-            ],
-            [
-                'question' => 'Systemic review',
-                'options' => json_encode(['not significant', 'significant']),
-                'group' => 'systemic review',
-            ],
-            [
-                'question' => 'Medications currently in use',
-                'options' => json_encode(['None', 'ORS', 'probiotic', 'zinc', 'Antibiotic']),
-                'group' => 'treatment history',
-            ],
-            [
-                'question' => 'Compliance to medicine',
-                'options' => json_encode(['As per doctors advice', 'Stopped medicine him/herself']),
-                'group' => 'treatment history',
-            ],
-            [
-                'question' => 'Blood transfusion',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'treatment history',
-            ],
-            [
-                'question' => 'Travel history',
-                'options' => json_encode(['local', 'international']),
-                'group' => 'travel history',
-            ],
-            [
-                'question' => 'Family History',
-                'options' => json_encode(['no history', 'similar complaint in family']),
-                'group' => 'family history',
-            ],
-            [
-                'question' => 'General',
-                'options' => json_encode(['Alert', 'Lethargic/Unconcious', 'restless/irritable', 'sunken eyes']),
-                'group' => 'diarrhea related examination',
-            ],
-            [
-                'question' => 'Systemic infection signs',
-                'options' => json_encode(['Febrile', 'afebrile', 'other']),
-                'group' => 'diarrhea related examination',
-            ],
-            [
-                'question' => 'Abdominal / Perianal examination',
-                'options' => json_encode(['pain on palpation', 'distention', 'other']),
-                'group' => 'diarrhea related examination',
-            ],
-            [
-                'question' => 'Able to drink',
-                'options' => json_encode(['Eagerly', 'poorly or unable', 'normally']),
-                'group' => 'diarrhea related examination',
-            ],
-            [
-                'question' => 'Skin turgor',
-                'options' => json_encode(['Very slowly', 'slowly', 'immediately']),
-                'group' => 'diarrhea related examination',
-            ],
-            [
-                'question' => 'Dehydration',
-                'options' => json_encode(['No dehydration', 'some dehydration', 'severe dehydration']),
-                'group' => 'diarrhea related examination',
-            ],
-            [
-                'question' => 'Laboratory history',
-                'options' => json_encode([
-                    'CBC', 'UCE', [
-                        'Stool DR', [
-                            'Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite', 'Stool CS: Ecoli', 'other organism'
-                        ]
-                    ]
-                ]),
-                'group' => 'laboratory history',
-            ],
-            [
-                'question' => 'Final diagnosis',
-                'options' => json_encode([
-                    'Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea'
-                ]),
-                'group' => 'final diagnosis',
-            ],
-            [
-                'question' => 'Confirmation of diagnosis',
-                'options' => json_encode([
-                    'clinically confirmed', 'laboratory confirmed', 'epidemiologically confirmed'
-                ]),
-                'group' => 'confirmation of diagnosis',
-            ],
-            [
-                'question' => 'Differential diagnosis',
-                'options' => json_encode(['Yes', 'No']),
-                'group' => 'differential diagnosis',
-            ],
-            [
-                'question' => 'Lump in back passage',
-                'options' => json_encode([
-                    'dosage' => [],
-                    'advice' => [],
-                    'labs' => []
-                ]),
-                'group' => 'precription/lab advice',
+            'lifestyle advice' => [
+                'lifestyle advice' => ['sub' => ['Self medication', 'malnutrition', 'compliance to medicine', 'diarrhea', 'food poisoning', 'handwashing',]],
             ],
 
         ];
-        Question::create();
+
+        foreach ($groups as $group => $questions) {
+            // dd($question, $group);
+            $group = Str::kebab($group);
+            foreach ($questions as $question => $options) {
+                // dd($question, $option);
+                $q = Question::create([
+                    'question' => ucfirst($question),
+                    'parent_id' => 0,
+                    'group' => $group,
+                    'alias' => ucfirst($options['alias'] ?? '')
+                ]);
+                foreach ($options['sub'] as $key => $option) {
+                    if (gettype($option) == 'array') {
+                        foreach ($option as $subOptions) {
+                            $o = Question::create([
+                                'question' => ucfirst($key),
+                                'group' => $group,
+                                'parent_id' => $q->id
+                            ]);
+                            // dump($key, $subOptions);
+                            // foreach ($subOptions as $option => $subOption) {
+                            //     dd($subOption);
+                            // Question::create([
+                            //     'question' => $option,
+                            //     'group' => $group,
+                            //     'parent_id' => $q->id
+                            // ]);
+                            Question::create([
+                                'question' => ucfirst($subOptions),
+                                'group' => $group,
+                                'parent_id' => $o->id
+                            ]);
+                            // }
+                        }
+                    } else {
+                        Question::create([
+                            'question' => ucfirst($option),
+                            'parent_id' => $q->id,
+                            'group' => $group
+                        ]);
+                    }
+                }
+            }
+        }
     }
 }
