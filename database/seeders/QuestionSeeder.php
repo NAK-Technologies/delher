@@ -67,7 +67,7 @@ class QuestionSeeder extends Seeder
                 'Dehydration' => ['sub' => ['No dehydration', 'some dehydration', 'severe dehydration'], 'alias' => 'dehydration'],
             ],
             'laboratory history' => [
-                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => 'Ecoli', 'other organism']],
+                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism']]],
             ],
             'final diagnosis' => [
                 'Final diagnosis' => ['sub' => ['Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea']],
@@ -79,8 +79,7 @@ class QuestionSeeder extends Seeder
                 'Differential diagnosis' => ['sub' => ['Yes', 'No']],
             ],
             'precription and lab advice' => [
-                'medicine' => ['sub' => ['name', 'strength', 'dose', 'duration', 'other']],
-                'labs' => ['sub' => ['CBC', 'UCE', 'LFT', 'PT', 'APTT', 'INR', 'Stook DR', 'Stool CS', 'Malaria', 'Dengue', 'Covid-19', 'other']],
+                'Prescription and Lab advice' => ['sub' => ['Medicine' => ['name', 'strength', 'dose', 'duration', 'other'], 'labs' => ['CBC', 'UCE', 'LFT', 'PT', 'APTT', 'INR', 'Stook DR', 'Stool CS', 'Malaria', 'Dengue', 'Covid-19', 'other']]]
             ],
             'follow-up advice' => [
                 'follow up' => ['sub' => ['after 1 week', 'after 2 weeks', 'after 1 month', 'Other' => 'date']],
@@ -104,12 +103,12 @@ class QuestionSeeder extends Seeder
                 ]);
                 foreach ($options['sub'] as $key => $option) {
                     if (gettype($option) == 'array') {
+                        $o = Question::create([
+                            'question' => ucfirst($key),
+                            'group' => $group,
+                            'parent_id' => $q->id
+                        ]);
                         foreach ($option as $subOptions) {
-                            $o = Question::create([
-                                'question' => ucfirst($key),
-                                'group' => $group,
-                                'parent_id' => $q->id
-                            ]);
                             // dump($key, $subOptions);
                             // foreach ($subOptions as $option => $subOption) {
                             //     dd($subOption);

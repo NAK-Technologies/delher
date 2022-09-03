@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('dob');
             // $table->text('address');
             $table->foreignId('city_id');
-            $table->string('area');
+            $table->string('area')->nullable();
             $table->string('street')->nullable();
             $table->string('house_no')->nullable();
             $table->string('education');

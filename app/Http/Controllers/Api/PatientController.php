@@ -24,7 +24,7 @@ class PatientController extends Controller
         foreach ($patients as $patient) {
             array_push($data, new PatientResource($patient));
         }
-        return $data;
+        return response($data);
     }
 
     /**
@@ -129,5 +129,16 @@ class PatientController extends Controller
     public function destroy(Patient $patient)
     {
         //
+    }
+
+    public function myPatients(Request $request)
+    {
+        // return response($user->patients);
+        return response($request->user()->patients);
+    }
+
+    public function patient(Patient $patient)
+    {
+        return response($patient);
     }
 }
