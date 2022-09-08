@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\City;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 

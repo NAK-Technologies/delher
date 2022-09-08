@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('parent_id')->default(0);
             $table->string('group');
             $table->boolean('is_active')->default(true);
+            $table->string('alias')->nullable();
+            $table->string('is_seperate')->default(false);
+            $table->string('has_multiple')->default(false);
             $table->timestamps();
         });
     }

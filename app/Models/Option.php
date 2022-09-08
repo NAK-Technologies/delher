@@ -11,7 +11,7 @@ class Option extends Model
 
     protected $table = 'questions';
 
-    public function question()
+    public function ques()
     {
         return $this->belongsTo(Question::class, 'parent_id', 'id')->where('is_active', true);
     }

@@ -78,8 +78,8 @@ class QuestionSeeder extends Seeder
             'differential diagnosis' => [
                 'Differential diagnosis' => ['sub' => ['Yes', 'No']],
             ],
-            'precription and lab advice' => [
-                'Prescription and Lab advice' => ['sub' => ['Medicine' => ['name', 'strength', 'dose', 'duration', 'other'], 'labs' => ['CBC', 'UCE', 'LFT', 'PT', 'APTT', 'INR', 'Stook DR', 'Stool CS', 'Malaria', 'Dengue', 'Covid-19', 'other']]]
+            'prescription and lab advice' => [
+                'Prescription and Lab advice' => ['sub' => ['Medicine' => ['name', 'strength', 'dose', 'duration', 'other', 'is_seperate' => true, 'is_seperate_all' => true], 'labs' => ['CBC', 'UCE', 'LFT', 'PT', 'APTT', 'INR', 'Stook DR', 'Stool CS', 'Malaria', 'Dengue', 'Covid-19', 'other', 'is_seperate' => true, 'has_multiple' => true]]]
             ],
             'follow-up advice' => [
                 'follow up' => ['sub' => ['after 1 week', 'after 2 weeks', 'after 1 month', 'Other' => 'date']],
@@ -106,29 +106,35 @@ class QuestionSeeder extends Seeder
                         $o = Question::create([
                             'question' => ucfirst($key),
                             'group' => $group,
-                            'parent_id' => $q->id
+                            'parent_id' => $q->id,
+                            'is_seperate' => $key == 'other' || $key == 'Other' ? true : array_key_exists('is_seperate', $options['sub'][$key]),
+                            'has_multiple' => array_key_exists('has_multiple', $options['sub'][$key])
                         ]);
-                        foreach ($option as $subOptions) {
-                            // dump($key, $subOptions);
-                            // foreach ($subOptions as $option => $subOption) {
-                            //     dd($subOption);
-                            // Question::create([
-                            //     'question' => $option,
-                            //     'group' => $group,
-                            //     'parent_id' => $q->id
-                            // ]);
-                            Question::create([
-                                'question' => ucfirst($subOptions),
-                                'group' => $group,
-                                'parent_id' => $o->id
-                            ]);
-                            // }
+                        foreach ($option as $k => $subOptions) {
+                            if ($k != 'is_seperate' && $k != 'is_seperate_all' && $k != 'has_multiple') {
+                                // dump($key, $subOptions);
+                                // foreach ($subOptions as $option => $subOption) {
+                                //     dd($subOption);
+                                // Question::create([
+                                //     'question' => $option,
+                                //     'group' => $group,
+                                //     'parent_id' => $q->id
+                                // ]);
+                                Question::create([
+                                    'question' => ucfirst($subOptions),
+                                    'group' => $group,
+                                    'parent_id' => $o->id,
+                                    'is_seperate' => $subOptions == 'other' || $subOptions == 'Other' ? true : array_key_exists('is_seperate_all', $options['sub'][$key])
+                                ]);
+                                // }
+                            }
                         }
                     } else {
                         Question::create([
                             'question' => ucfirst($option),
                             'parent_id' => $q->id,
-                            'group' => $group
+                            'group' => $group,
+                            'is_seperate' => explode(' ', $option)[0] == 'other' || explode(' ', $option)[0] == 'Other' ? true : false,
                         ]);
                     }
                 }
