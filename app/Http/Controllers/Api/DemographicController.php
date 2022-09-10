@@ -42,6 +42,7 @@ class DemographicController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id' => 'required',
             'dob' => 'required|string',
             'city_id' => 'required',
             'area' => 'required|string',
@@ -52,7 +53,7 @@ class DemographicController extends Controller
             'exclusively_breastfed' => 'required|boolean'
         ]);
 
-        $patient = Patient::where('mr_no', $request->mr_no);
+        $patient = Patient::where('id', $request->patient_id);
         // $patient = Patient::doesntHave('demographic')->where('mr_no', $request->mr_no)->firstOrFail();
         // $patient->demographic()->create([]);
         if ($patient = $patient->doesntHave('demographic')->first()) {
