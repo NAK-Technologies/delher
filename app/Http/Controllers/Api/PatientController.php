@@ -72,7 +72,7 @@ class PatientController extends Controller
         ];
 
 
-        // return auth()->user()->patients()->create([
+        // return $request->user()->patients()->create([
         //     'mr_no' => $r['nic'] ? $r['nic'] : $r['contact'],
         //     'fullname' => $r['fullname'],
         //     'father_name' => $r['father_name'] ?? '',
