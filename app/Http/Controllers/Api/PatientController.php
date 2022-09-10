@@ -50,26 +50,26 @@ class PatientController extends Controller
         //     return $this->update($request, Patient::where('mr_no', $request->mr_no)->first());
         // }
 
-        $r = $request->validate([
-            'first_name' => 'required|string|max:32',
-            'middle_name' => 'string|max:32',
-            'last_name' => 'required|string|max:32',
-            'father_name' => 'string|max:32',
-            'mother_name' => 'string|max:32',
-            'cnic' => empty($request->contact) ? 'required|numeric|digits:13|unique:patients,cnic' : 'numeric|digits:13|unique:patients,cnic',
-            'contact' => empty($request->nic) ? 'required|numeric|digits:11|unique:patients,contact' : 'numeric|unique:patients,contact|digits:11',
-        ]);
+   //     $r = $request->validate([
+     //       'first_name' => 'required|string|max:32',
+       //     'middle_name' => 'string|max:32',
+       //     'last_name' => 'required|string|max:32',
+       //     'father_name' => 'string|max:32',
+       //     'mother_name' => 'string|max:32',
+       //     'cnic' => empty($request->contact) ? 'required|numeric|digits:13|unique:patients,cnic' : 'numeric|digits:13|unique:patients,cnic',
+      //      'contact' => empty($request->nic) ? 'required|numeric|digits:11|unique:patients,contact' : 'numeric|unique:patients,contact|digits:11',
+      //  ]);
 
-        $data = [
-            'mr_no' => isset($r['cnic']) ? $r['cnic'] : $r['contact'],
-            'first_name' => $r['first_name'],
-            'middle_name' => $r['middle_name'] ?? '',
-            'last_name' => $r['last_name'],
-            'father_name' => $r['father_name'] ?? '',
-            'mother_name' => $r['mother_name'] ?? '',
-            'cnic' => $r['cnic'] ?? '',
-            'contact' => $r['contact'] ?? ''
-        ];
+//        $data = [
+  //          'mr_no' => isset($r['cnic']) ? $r['cnic'] : $r['contact'],
+  //          'first_name' => $r['first_name'],
+   //         'middle_name' => $r['middle_name'] ?? '',
+    //        'last_name' => $r['last_name'],
+     //       'father_name' => $r['father_name'] ?? '',
+      //      'mother_name' => $r['mother_name'] ?? '',
+       //     'cnic' => $r['cnic'] ?? '',
+        //    'contact' => $r['contact'] ?? ''
+      //  ];
 
 
         // return $request->user()->patients()->create([
@@ -80,7 +80,7 @@ class PatientController extends Controller
         //     'nic' => $r['nic'],
         //     'contact' => $r['contact']
         // ]);
-        return response($data);
+        return response($request->all());
         dump($request->user());
         $patient =  $request->user()->patients()->create($data);
         dump($patient);
