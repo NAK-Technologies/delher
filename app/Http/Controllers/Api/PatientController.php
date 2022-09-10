@@ -84,7 +84,7 @@ class PatientController extends Controller
         dump($request->user());
         $patient =  $request->user()->patients()->create($data);
         dump($patient);
-        return new PatientResource($patient);
+//         return new PatientResource($patient);
     }
 
     /**
