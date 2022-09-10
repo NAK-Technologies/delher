@@ -42,8 +42,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/patients', [PatientController::class, 'index'])->middleware('abilities:view-patients');
         Route::get('/patients/my', [PatientController::class, 'myPatients'])->middleware('abilities:view-patients');
         Route::get('/patients/show/{patient}', [PatientController::class, 'patient'])->middleware('abilities:view-patients');
-        Route::post('/patients/create', [PatientController::class, 'store'])->middleware(['auth:sanctum', 'abilities:create-patients']);
-        Route::post('/patients/check-mr_no', [PatientController::class, 'checkMR'])->middleware(['auth:sanctum', 'abilities:create-patients']);
+        Route::post('/patients/create', [PatientController::class, 'store'])->middleware('abilities:create-patients');
+        Route::post('/patients/check-mr_no', [PatientController::class, 'checkMR'])->middleware('abilities:create-patients');
 
         Route::get('/demographics', [DemographicController::class, 'index']);
         Route::post('/demographics/create', [DemographicController::class, 'store']);
