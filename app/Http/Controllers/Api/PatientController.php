@@ -81,7 +81,7 @@ class PatientController extends Controller
         //     'contact' => $r['contact']
         // ]);
         // dump($data);
-        $patient =  auth()->user()->patients()->create($data);
+        $patient =  $request->user()->patients()->create($data);
         return new PatientResource($patient);
     }
 
