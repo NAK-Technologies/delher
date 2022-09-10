@@ -80,10 +80,10 @@ class PatientController extends Controller
         //     'nic' => $r['nic'],
         //     'contact' => $r['contact']
         // ]);
-        return response($request->all());
-        dump($request->user());
+        return dump($request->all());
+        // dump($request->user());
         $patient =  $request->user()->patients()->create($data);
-        dump($patient);
+        //dump($patient);
 //         return new PatientResource($patient);
     }
 
