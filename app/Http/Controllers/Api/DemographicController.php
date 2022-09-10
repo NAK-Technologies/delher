@@ -68,10 +68,20 @@ class DemographicController extends Controller
                 'visit_type' => $request->visit_type,
                 'exclusively_breastfed' => (bool)$request->exclusively_breastfed,
             ]);
-            return response('Data saved successfully');
+            // return response(json_encode(['Data saved successfully'));
+            $message = [
+                'message' => 'Data saved successfully',
+                'status' => 'success'
+            ];
         } else {
-            return response("Patient's demographics already exists");
+            $message = [
+                'message' => "Patient's demographics already exists",
+                'status' => 'failed'
+            ];
+            // return response(json_encode("Patient's demographics already exists"));
         }
+
+        return response(json_encode($message));
     }
 
     /**

@@ -25,7 +25,8 @@ class PatientResource extends JsonResource
             'contact' => $this->contact,
             'cnic' => $this->cnic,
             'father_name' => $this->father_name,
-            'mother_name' => $this->mother_name
+            'mother_name' => $this->mother_name,
+            'demographics' => $this->has('demographic') ? $this->demographic : '',
         ];
     }
 }
