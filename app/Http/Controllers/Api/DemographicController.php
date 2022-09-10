@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PatientResource;
 use App\Models\Demographic;
 use App\Models\Patient;
 use Illuminate\Http\Request;
@@ -69,10 +70,7 @@ class DemographicController extends Controller
                 'exclusively_breastfed' => (bool)$request->exclusively_breastfed,
             ]);
             // return response(json_encode(['Data saved successfully'));
-            $message = [
-                'message' => 'Data saved successfully',
-                'status' => 'success'
-            ];
+            return new PatientResource($patient);
         } else {
             $message = [
                 'message' => "Patient's demographics already exists",
@@ -81,7 +79,7 @@ class DemographicController extends Controller
             // return response(json_encode("Patient's demographics already exists"));
         }
 
-        return response(json_encode($message));
+        return json_encode($message);
     }
 
     /**
