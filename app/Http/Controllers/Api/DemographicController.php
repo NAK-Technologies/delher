@@ -42,7 +42,7 @@ class DemographicController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => 'required',
+            'patient_id' => 'required',
             'dob' => 'required|string',
             'city_id' => 'required',
             'area' => 'required|string',
