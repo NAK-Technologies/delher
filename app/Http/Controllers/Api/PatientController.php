@@ -97,7 +97,7 @@ class PatientController extends Controller
     {
         $patient = Patient::where('mr_no', $request->mr_no)->first();
         // return response($patient != null ? true : 'false');
-        return response($patient != null);
+        return response($patient != null ? json_encode($patient) : json_encode([]));
     }
 
     /**
