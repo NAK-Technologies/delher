@@ -59,7 +59,7 @@ class DemographicController extends Controller
         // $patient->demographic()->create([]);
         if ($patient = $patient->doesntHave('demographic')->first()) {
             $patient = $patient->demographic()->create([
-                'dob' => $request->dob,
+                'dob' => \Carbon\Carbon::parse($request->dob),
                 'city_id' => (int)$request->city_id,
                 'area' => $request->area,
                 'street' => $request->street ?? null,
