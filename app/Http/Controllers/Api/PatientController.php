@@ -82,9 +82,12 @@ class PatientController extends Controller
         // ]);
         //return dump($request->all());
         // dump($request->user());
-        $patient =  $request->user()->patients()->create($data);
+        if ($patient =  $request->user()->patients()->create($data)) {
+            return new PatientResource($patient);
+        } else {
+            return json_encode(['message' => 'Patient not found', 'status' => 'failed']);
+        }
         //dump($patient);
-        return new PatientResource($patient);
     }
 
     /**
