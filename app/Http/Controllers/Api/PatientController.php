@@ -49,6 +49,27 @@ class PatientController extends Controller
         // if ($request->has('mr_no')) {
         //     return $this->update($request, Patient::where('mr_no', $request->mr_no)->first());
         // }
+        // if (empty($request->contact)) {
+        //     $r = $request->validate([
+        //         'first_name' => 'required|string|max:32',
+        //         'middle_name' => 'string|max:32',
+        //         'last_name' => 'required|string|max:32',
+        //         'father_name' => 'string|max:32',
+        //         'mother_name' => 'string|max:32',
+        //         'cnic' => 'required|numeric|digits:13|unique:patients,cnic',
+        //         'contact' => 'numeric|unique:patients,contact|digits:11',
+        //     ]);
+        // } elseif (empty($request->cnic)) {
+        //     $r = $request->validate([
+        //         'first_name' => 'required|string|max:32',
+        //         'middle_name' => 'string|max:32',
+        //         'last_name' => 'required|string|max:32',
+        //         'father_name' => 'string|max:32',
+        //         'mother_name' => 'string|max:32',
+        //         'cnic' => empty($request->contact) ? 'required|numeric|digits:13|unique:patients,cnic' : 'numeric|digits:13|unique:patients,cnic',
+        //         'contact' => empty($request->cnic) ? 'required|numeric|digits:11|unique:patients,contact' : 'numeric|unique:patients,contact|digits:11',
+        //     ]);
+        // }
 
         $r = $request->validate([
             'first_name' => 'required|string|max:32',
@@ -57,7 +78,7 @@ class PatientController extends Controller
             'father_name' => 'string|max:32',
             'mother_name' => 'string|max:32',
             'cnic' => empty($request->contact) ? 'required|numeric|digits:13|unique:patients,cnic' : 'numeric|digits:13|unique:patients,cnic',
-            'contact' => empty($request->nic) ? 'required|numeric|digits:11|unique:patients,contact' : 'numeric|unique:patients,contact|digits:11',
+            'contact' => empty($request->cnic) ? 'required|numeric|digits:11|unique:patients,contact' : 'numeric|unique:patients,contact|digits:11',
         ]);
 
         $data = [
