@@ -11,8 +11,10 @@ class AnswerController extends Controller
 {
     public function store(Request $request)
     {
+        $group = \Carbon\Carbon::parse(\Carbon\Carbon::now());
         foreach ($request->all() as $answer) {
             $answer['answer'] = $answer['answer'] ?? '';
+            $answer['group'] = $group;
             // $ans
             Answer::create($answer);
         }

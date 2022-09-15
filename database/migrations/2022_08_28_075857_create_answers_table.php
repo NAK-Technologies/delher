@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('question_id');
             $table->foreignId('patient_id');
+            $table->string('group');
             $table->string('answer')->nullable();
             $table->timestamps();
         });
