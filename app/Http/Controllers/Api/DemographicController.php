@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DemographicResource;
 use App\Http\Resources\PatientResource;
 use App\Models\Demographic;
 use App\Models\Patient;
@@ -54,10 +55,15 @@ class DemographicController extends Controller
             'exclusively_breastfed' => 'required|boolean'
         ]);
 
-        $patient = Patient::where('id', $request->patient_id);
+        $patient = Patient::where('id', $request->patient_id)->first();
+        // dump($patient);
+        // exit();
         // $patient = Patient::doesntHave('demographic')->where('mr_no', $request->mr_no)->firstOrFail();
         // $patient->demographic()->create([]);
-        if ($patient = $patient->doesntHave('demographic')->first()) {
+        if (!$patient->demographic()->exists()) {
+            // dump($patient);
+            // exit();
+            // $patient = $patient->first();
             $patient = $patient->demographic()->create([
                 'dob' => \Carbon\Carbon::parse($request->dob),
                 'city_id' => (int)$request->city_id,
@@ -70,7 +76,7 @@ class DemographicController extends Controller
                 'exclusively_breastfed' => (bool)$request->exclusively_breastfed,
             ]);
             // return response(json_encode(['Data saved successfully'));
-            return new PatientResource($patient);
+            return new DemographicResource($patient);
         } else {
             $message = [
                 'message' => "Patient's demographics already exists",
