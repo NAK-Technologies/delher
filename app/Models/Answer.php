@@ -10,7 +10,7 @@ class Answer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patient_id', 'question_id', 'answer'
+        'patient_id', 'question_id', 'answer', 'group'
     ];
 
     public function option()
