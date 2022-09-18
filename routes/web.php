@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnswerController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 	Route::view('/users', 'users.index')->name('users.index');
+	Route::get('answers', [AnswerController::class, 'index']);
 });
 // Auth::routes();
 
