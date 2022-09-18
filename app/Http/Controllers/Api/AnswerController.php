@@ -19,10 +19,13 @@ class AnswerController extends Controller
     {
         $group = \Carbon\Carbon::parse(\Carbon\Carbon::now());
         foreach ($request->all() as $answer) {
-            $answer['answer'] = $answer['answer'] ?? '';
-            $answer['group'] = $group;
+            $new = new Answer;
+            $new->answer = $answer['answer'] ?? '';
+            $new->group = $group;
+            $new->question_id = $answer['question_id'];
+            $new->patient_id = $answer['patient_id'];
             // $ans
-            Answer::create($answer);
+            $new->save();
         }
         return response('Created Successfully');
     }
