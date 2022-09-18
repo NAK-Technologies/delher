@@ -59,7 +59,7 @@
                                 {{-- @dd($tab) --}}
                             <label class="btn btn-sm btn-info btn-simple {{ $loop->first ? 'active' : '' }}" id="c2-{{ $loop->iteration -1 }}">
                                 <input type="radio" name="options" {{ $loop->first ? 'checked' : '' }}>
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">{{ $tab->alias }}</span>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">{{ $tab->alias ?? $tab->question}}</span>
                                 <span class="d-block d-sm-none">
                                     <i class="tim-icons icon-single-02"></i>
                                 </span>
