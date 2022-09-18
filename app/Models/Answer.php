@@ -22,4 +22,9 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }
