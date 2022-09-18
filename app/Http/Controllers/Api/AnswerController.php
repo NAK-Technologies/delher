@@ -12,7 +12,8 @@ class AnswerController extends Controller
     public function index()
     {
         $answers = Answer::all()->groupBy('group');
-        return view('answers.index', compact('answers'));
+        $json = json_encode($answers);
+        return view('answers.index', compact('answers', 'json'));
     }
     public function store(Request $request)
     {
