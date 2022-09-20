@@ -210,10 +210,10 @@
                                         <input type="date" class="form-control" wire:model.defer="answers.{{ $option->id }}">
                                     </div>
                                 @else
-                                    @php $isSelect = true; @endphp
+                                    @php $isSelect3 = true; @endphp
                                 @endif
                             @endforeach
-                            @if($isSelect)
+                            @if($isSelect3)
                                 <div class="col-4">
                                     <select class="form-control" wire:model="answers.{{ $question->id }}">
                                         <option value=""></option>
@@ -226,13 +226,13 @@
                                 </div>
                                 @if((array_key_exists($question->id, $answers) && $answers[$question->id]) || $question->options->has('options'))
                                 <div class="col-4">
-                                    @php $isSelect = false; @endphp
+                                    @php $isSelect3 = false; @endphp
                                     @foreach($question->options as $option)
                                         @if($answers[$question->id] == $option->id)
                                             @if(strtolower(explode(' ', $option->question)[0]) == 'date')
                                                 <input type="date" class="form-control" wire:model.defer="answers.{{ $option->id }}">
                                             @elseif($option->options->isNotEmpty())
-                                                @php $isSelect = true; @endphp
+                                                @php $isSelect3 = true; @endphp
                                             @endif
                                         @endif
                                     @endforeach
@@ -241,7 +241,6 @@
                             @endif
                         @else
                         <div class="col-4">
-                            
                             <input type="text" class="form-control" wire:model.defer="answers.{{ $question->id }}">
                         </div>
                         @endif

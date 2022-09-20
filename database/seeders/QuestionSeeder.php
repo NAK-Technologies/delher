@@ -30,7 +30,7 @@ class QuestionSeeder extends Seeder
                 'Lump in back passage' => ['sub' => ['Yes', 'No']],
             ],
             'past history' => [
-                'Past similar episode(s) of diarrhea' => ['sub' => ['Yes' => ['within 1 month', 'within 3 months', 'within 6 months', 'within 12 months', 'more than 12 months']], 'No', 'alias' => 'frequency'],
+                'Past similar episode(s) of diarrhea' => ['sub' => ['Yes' => ['within 1 month', 'within 3 months', 'within 6 months', 'within 12 months', 'more than 12 months'], 'No'], 'alias' => 'frequency'],
                 'How was the last episode' => ['sub' => ['serious', 'non-serious'], 'alias' => 'Severity'],
                 'Previous Hopitalization due to diarrhea' => ['sub' => ['Yes', 'No']],
             ],
@@ -67,7 +67,7 @@ class QuestionSeeder extends Seeder
                 'Dehydration' => ['sub' => ['No dehydration', 'some dehydration', 'severe dehydration'], 'alias' => 'dehydration'],
             ],
             'laboratory history' => [
-                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism']]],
+                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism']], 'has_multiple' => true],
             ],
             'final diagnosis' => [
                 'Final diagnosis' => ['sub' => ['Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea']],

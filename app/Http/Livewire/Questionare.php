@@ -104,9 +104,10 @@ class Questionare extends Component
         $this->questions = $questions;
         $groups = $this->questions;
 
-        // $id = 1;
-        // $this->patientID = $thisid;
-        // $this->patient = Patient::find($id);
+        $id = 1;
+        $this->patientID = $id;
+        $this->patient = Patient::find($id);
+        // dd($this->patientID, $this->patient);
         $patient = $this->patient;
         // dd($this->test($questions));
         return view('livewire.questionare', compact('groups', 'patient'));
