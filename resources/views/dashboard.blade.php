@@ -1,7 +1,8 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('content')
-    <livewire:dashboard.dashboard-charts />
+@livewire('daily-summary')
+    {{-- <livewire:dashboard.dashboard-charts /> --}}
     {{-- <div class="row">
         <div class="col-12">
             <div class="card card-chart bg-dark">
@@ -379,14 +380,9 @@
     </div> --}}
 @endsection
 
-@push('js')
+{{-- @push('js')
     <script>
-        $(document).ready(function() {
-            //   })
-          demo.initDashboardPageCharts();
-        //   Livewire.on('test', function () {
-        //     alert('workingHere');
-    });
+        console.log(123);
     </script>
 
-@endpush
+@endpush --}}

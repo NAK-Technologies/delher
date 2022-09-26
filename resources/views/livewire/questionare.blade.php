@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    @if($patientID != null)
+    @if($patient != null)
         <h4>{{ $patient->firstname.' '.$patient->lastname }}</h4>
         {{-- <h4>Patient: {{ $patient->name }}</h4> --}}
         <h5>MR# {{ $patient->mr_no }}</h5>

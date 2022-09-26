@@ -18,24 +18,24 @@ class QuestionSeeder extends Seeder
     {
         $groups = [
             'presenting complaints' => [
-                'Primary Complaint' => ['sub' => ['loose stools', 'Diarrhea'], 'alias' => 'complaints'],
+                'Primary Complaint' => ['sub' => ['loose stools / Diarrhea'], 'alias' => 'Complaints'],
                 'Start Date' => ['sub' => ['date']],
                 'End Date' => ['sub' => ['date', 'ongoing']],
-                'Frequency' => ['sub' => ['1', '2', '3', '4', '5-10', '10-15', '15-20', '>20'], 'alias' => 'frequency'],
-                'Associated Complaints' => ['sub' => ['nausea', 'vomiting', 'abdominal pain', 'fever', 'alternate with constipation', 'incomplete evacuation', 'urge to pass stool', 'mouth ulcer', 'joint pain', 'rash', 'Other'], 'alias' => 'associated'],
-                'Amount of Stool' => ['sub' => ['small', 'normal', 'large'], 'alias' => 'amount'],
-                'Consistency' => ['sub' => ['watery', 'pasty'], 'alias' => 'consistency'],
-                'Contents' => ['sub' => ['blood', 'mucous', 'fat', 'difficult to flush'], 'alias' => 'contents'],
+                'Frequency' => ['sub' => ['1', '2', '3', '4', '5-10', '10-15', '15-20', '>20'], 'alias' => 'Frequency'],
+                'Associated Complaints' => ['sub' => ['nausea', 'vomiting', 'abdominal pain', 'fever', 'alternate with constipation', 'incomplete evacuation', 'urge to pass stool', 'mouth ulcer', 'joint pain', 'rash', 'Other'], 'has_multiple' => true, 'alias' => 'Associated'],
+                'Amount of Stool' => ['sub' => ['small', 'normal', 'large'], 'alias' => 'Amount'],
+                'Consistency' => ['sub' => ['watery', 'pasty'], 'alias' => 'Consistency'],
+                'Contents' => ['sub' => ['blood', 'mucous', 'fat', 'difficult to flush'], 'alias' => 'Contents'],
                 'Blood from any other site' => ['sub' => ['Yes', 'No'], 'alias' => ''],
                 'Lump in back passage' => ['sub' => ['Yes', 'No']],
             ],
             'past history' => [
-                'Past similar episode(s) of diarrhea' => ['sub' => ['Yes' => ['within 1 month', 'within 3 months', 'within 6 months', 'within 12 months', 'more than 12 months'], 'No'], 'alias' => 'frequency'],
+                'Past similar episode(s) of diarrhea' => ['sub' => ['Yes' => ['within 1 month', 'within 3 months', 'within 6 months', 'within 12 months', 'more than 12 months'], 'No'], 'alias' => 'Frequency'],
                 'How was the last episode' => ['sub' => ['serious', 'non-serious'], 'alias' => 'Severity'],
                 'Previous Hopitalization due to diarrhea' => ['sub' => ['Yes', 'No']],
             ],
             'vaccination history' => [
-                'Vaccination history' => ['sub' => ['All completed', 'Rotavirus vaccine', 'measles vaccine'], 'alias' => 'Vaccination'],
+                'Vaccination history' => ['sub' => ['All completed', 'Rotavirus vaccine', 'measles vaccine'], 'alias' => 'Vaccination', 'has_multiple' => true],
             ],
             'lifestyle' => [
                 'Drinking water (home)' => ['sub' => ['Boiled', 'Unboiled',  'tap water', 'bottled water', 'RO water', 'other'], 'alias' => 'water'],
@@ -67,7 +67,7 @@ class QuestionSeeder extends Seeder
                 'Dehydration' => ['sub' => ['No dehydration', 'some dehydration', 'severe dehydration'], 'alias' => 'dehydration'],
             ],
             'laboratory history' => [
-                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism']], 'has_multiple' => true],
+                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism'], 'has_multiple' => true]],
             ],
             'final diagnosis' => [
                 'Final diagnosis' => ['sub' => ['Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea']],
