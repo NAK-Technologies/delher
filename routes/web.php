@@ -58,5 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('patients.all-patients', compact('patients'));
 	})->name('patients.index');
 
+	Route::get('/patients/show/{patient}', function (Patient $patient) {
+		return view('patients.show', compact('patient'));
+	})->name('patient.show');
+
 	// Route::get('/user-management', )->name('user.index');
 });
