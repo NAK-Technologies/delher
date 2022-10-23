@@ -90,15 +90,13 @@ window.addEventListener('openUserEditModal', event => {
             <input type="text" class="form-control" id="email" wire:model.defer="email">
             @error('email') <span class="error">{{ $message }}</span> @enderror
           </div>
-          <div class="col-4 mt-2">
-            <label for="location">Location:</label>
-            <input type="text" id="location" class="form-control" wire:model.defer="location" list="locations">
-            <datalist id="locations">
-                @foreach($locations as $location)
-                <option value="{{ $location }}"></option>
-                @endforeach
-            </datalist>
+          <div class="col-4">
+            <label for="email" class="col-form-label">Password: </label>
+            <br><label for="">{{ $unhashed }}</label>
+            {{-- <input type="text" class="form-control" id="email" wire:model.defer="email">
+            @error('email') <span class="error">{{ $message }}</span> @enderror --}}
           </div>
+          
         </div>
         <div class="row">
           <div class="col-4">
@@ -109,6 +107,15 @@ window.addEventListener('openUserEditModal', event => {
                 <option value="viewer">Viewer</option>
                 <option value="admin">Admin</option>
             </select>
+          </div>
+          <div class="col-4 mt-2">
+            <label for="location">Location:</label>
+            <input type="text" id="location" class="form-control" wire:model.defer="location" list="locations">
+            <datalist id="locations">
+                @foreach($locations as $location)
+                <option value="{{ $location }}"></option>
+                @endforeach
+            </datalist>
           </div>
           <div class="col-4">
             {{-- <label for="role" class="col-form-label"></label> --}}

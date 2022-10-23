@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'unhashed',
         'created_by',
         'role',
         'city',

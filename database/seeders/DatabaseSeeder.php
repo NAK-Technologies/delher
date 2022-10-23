@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dev',
             'email' => 'dev@dspss.com',
             'password' => Hash::make('@secret123'),
+            'unhashed' => '@secret123'
         ]);
     }
 }

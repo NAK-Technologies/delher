@@ -23,12 +23,18 @@
                     <p>{{ _('Questions') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'patients') class="active " @endif>
+            <li @if ($pageSlug == 'questionnaire') class="active " @endif>
+                <a href="{{ route('questionnaire.index')  }}">
+                    <i class="tim-icons icon-single-copy-04"></i>
+                    <p>{{ __('Questionniare') }}</p>
+                </a>
+            </li>
+            {{-- <li @if ($pageSlug == 'patients') class="active " @endif>
                 <a href="{{ route('patients.index')  }}">
                     <i class="tim-icons icon-single-copy-04"></i>
                     <p>{{ _('Patients') }}</p>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>

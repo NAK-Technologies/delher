@@ -34,12 +34,13 @@ class UserAdd extends Component
                 'city' => $this->city,
                 'location' => $this->location,
                 'password' => Hash::make($password),
-                'created_by' => auth()->user()->id
+                'created_by' => auth()->user()->id,
+                'unhashed' => $password,
             ]);
             $user->password = $password;
             // dd($user);
             // event(new UserCreated($user));
-            UserCreated::dispatch($user, $password);
+            // UserCreated::dispatch($user, $password);
             $this->resetExcept();
             $this->emitTo('user-all', 'render');
             toastr()->success(ucfirst($user->role) . ' ' . $user->name . ' created successfully');

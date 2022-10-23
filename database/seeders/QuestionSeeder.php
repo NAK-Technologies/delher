@@ -25,7 +25,7 @@ class QuestionSeeder extends Seeder
                 'Associated Complaints' => ['sub' => ['nausea', 'vomiting', 'abdominal pain', 'fever', 'alternate with constipation', 'incomplete evacuation', 'urge to pass stool', 'mouth ulcer', 'joint pain', 'rash', 'Other'], 'has_multiple' => true, 'alias' => 'Associated'],
                 'Amount of Stool' => ['sub' => ['small', 'normal', 'large'], 'alias' => 'Amount'],
                 'Consistency' => ['sub' => ['watery', 'pasty'], 'alias' => 'Consistency'],
-                'Contents' => ['sub' => ['blood', 'mucous', 'fat', 'difficult to flush'], 'alias' => 'Contents'],
+                'Contents' => ['sub' => ['blood', 'mucous', 'fat', 'difficult to flush'], 'alias' => 'Contents', 'has_multiple' => true],
                 'Blood from any other site' => ['sub' => ['Yes', 'No'], 'alias' => ''],
                 'Lump in back passage' => ['sub' => ['Yes', 'No']],
             ],
@@ -40,7 +40,7 @@ class QuestionSeeder extends Seeder
             'lifestyle' => [
                 'Drinking water (home)' => ['sub' => ['Boiled', 'Unboiled',  'tap water', 'bottled water', 'RO water', 'other'], 'alias' => 'water'],
                 'Type of toilet' => ['sub' => ['western', 'eastern', 'forest', 'river/stream', 'digging hole'], 'alias' => 'toilet'],
-                'Suspected Food' => ['sub' => []],
+                'Suspected Food' => ['sub' => ['homemade', 'junkfood', 'street food']],
                 'Regular soap use' => ['sub' => ['Yes', 'No'], 'alias' => 'soap use'],
                 'Animals at home' => ['sub' => ['Yes', 'No'], 'alias' => 'animals interaction'],
             ],
@@ -48,18 +48,18 @@ class QuestionSeeder extends Seeder
                 'Systemic review' => ['sub' => ['not significant', 'significant']],
             ],
             'treatment history' => [
-                'Medications currently in use' => ['sub' => ['None', 'ORS', 'probiotic', 'zinc', 'Antibiotic'], 'alias' => 'medications'],
+                'Medications currently in use' => ['sub' => ['None', 'ORS', 'probiotic', 'zinc', 'Antibiotic'], 'alias' => 'medications', 'has_multiple' => true],
                 'Compliance to medicine' => ['sub' => ['As per doctors advice', 'Stopped medicine him/herself'], 'alias' => 'compliance'],
                 'Blood transfusion' => ['sub' => ['Yes', 'No'], 'alias' => 'transfusion'],
             ],
             'travel history' => [
-                'Travel history' => ['sub' => ['local', 'international']],
+                'Travel history' => ['sub' => ['local', 'international', 'none']],
             ],
             'family history' => [
                 'Family History' => ['sub' => ['no history', 'similar complaint in family']],
             ],
             'diarrhea related examination' => [
-                'General' => ['sub' => ['Alert', 'Lethargic/Unconcious', 'restless/irritable', 'sunken eyes'], 'alias' => 'general'],
+                'General' => ['sub' => ['Alert', 'Lethargic/Unconcious', 'restless/irritable', 'sunken eyes'], 'alias' => 'general', 'has_multiple' => true],
                 'Systemic infection signs' => ['sub' => ['Febrile', 'afebrile', 'other'], 'alias' => 'infection'],
                 'Abdominal / Perianal examination' => ['sub' => ['pain on palpation', 'distention', 'other'], 'alias' => 'examination'],
                 'Able to drink' => ['sub' => ['Eagerly', 'poorly or unable', 'normally'], 'alias' => 'able to drink'],
@@ -67,13 +67,13 @@ class QuestionSeeder extends Seeder
                 'Dehydration' => ['sub' => ['No dehydration', 'some dehydration', 'severe dehydration'], 'alias' => 'dehydration'],
             ],
             'laboratory history' => [
-                'Laboratory history' => ['sub' => ['CBC', 'UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism'], 'has_multiple' => true]],
+                'Laboratory history' => ['sub' => ['UCE', 'Stool DR' => ['Mucous', 'Red cells', 'occult blood', 'Bacteria', 'Ova', 'parasite'], 'Stool CS' => ['Ecoli', 'other organism']], 'has_multiple' => true],
             ],
             'final diagnosis' => [
-                'Final diagnosis' => ['sub' => ['Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea']],
+                'Final diagnosis' => ['sub' => ['Acute', 'Persistent', 'Chronic', 'Mild', 'moderate', 'severe', 'Inflammatory diarrhea', 'infectious diarrhea', 'bacterial', 'viral', 'parasitic', 'Non inflammatory diarrhea', 'Osmotic diarrhea', 'Antibiotic associated diarrhea', 'secretory diarrhea', 'Other diarrhea'], 'has_multiple' => true],
             ],
             'confirmation of diagnosis' => [
-                'Confirmation of diagnosis' => ['sub' => ['clinically confirmed', 'laboratory confirmed', 'epidemiologically confirmed']],
+                'Confirmation of diagnosis' => ['sub' => ['clinically confirmed', 'laboratory confirmed', 'epidemiologically confirmed'], 'has_multiple' => true],
             ],
             'differential diagnosis' => [
                 'Differential diagnosis' => ['sub' => ['Yes', 'No']],
@@ -85,7 +85,7 @@ class QuestionSeeder extends Seeder
                 'follow up' => ['sub' => ['after 1 week', 'after 2 weeks', 'after 1 month', 'Other' => 'date']],
             ],
             'lifestyle advice' => [
-                'lifestyle advice' => ['sub' => ['Self medication', 'malnutrition', 'compliance to medicine', 'diarrhea', 'food poisoning', 'handwashing',]],
+                'lifestyle advice' => ['sub' => ['Self medication', 'malnutrition', 'compliance to medicine', 'diarrhea', 'food poisoning', 'handwashing',], 'has_multiple' => true],
             ],
 
         ];
@@ -99,7 +99,8 @@ class QuestionSeeder extends Seeder
                     'question' => ucfirst($question),
                     'parent_id' => 0,
                     'group' => $group,
-                    'alias' => ucfirst($options['alias'] ?? '')
+                    'alias' => ucfirst($options['alias'] ?? ''),
+                    'has_multiple' => array_key_exists('has_multiple', $options) && $options['has_multiple'] === true ? true : false
                 ]);
                 foreach ($options['sub'] as $key => $option) {
                     if (gettype($option) == 'array') {

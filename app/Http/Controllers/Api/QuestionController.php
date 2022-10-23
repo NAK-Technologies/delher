@@ -84,4 +84,11 @@ class QuestionController extends Controller
     {
         //
     }
+
+    public function options(Question $question)
+    {
+        $options = $question->options;
+
+        return response($options);
+    }
 }

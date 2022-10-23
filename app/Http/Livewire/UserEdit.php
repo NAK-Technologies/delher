@@ -11,6 +11,7 @@ class UserEdit extends Component
 {
     public $name;
     public $email;
+    public $unhashed;
     public $role;
     public $city;
     public $location;
@@ -35,6 +36,7 @@ class UserEdit extends Component
 
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->unhashed = $user->unhashed;
         $this->role = $user->role;
         $this->location = $user->location;
         $this->city = $user->city()->first()->id . '-' . $user->city()->first()->name;

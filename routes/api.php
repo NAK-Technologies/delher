@@ -55,6 +55,8 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::post('/add-answers', [AnswerController::class, 'store']);
 
+        Route::get('/question/{question}/options', [QuestionController::class, 'options']);
+
         Route::get('/questions', [QuestionController::class, 'index']);
 
         Route::get('/cities', [CityController::class, 'index']);

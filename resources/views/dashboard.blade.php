@@ -1,7 +1,8 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('content')
-@livewire('daily-summary')
+{{-- @livewire('daily-summary') --}}
+@livewire('dashboard.dashboard-charts')
     {{-- <livewire:dashboard.dashboard-charts /> --}}
     {{-- <div class="row">
         <div class="col-12">
