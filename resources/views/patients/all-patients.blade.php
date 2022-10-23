@@ -15,7 +15,7 @@
                                    <th>S.No</th>
                                    <th>Name</th>
                                    <th>Date of Birth</th>
-                                   <th>Record Create At</th>
+                                   <th>Record Created At</th>
                                    <th></th>
                               </tr>
                          </thead>
