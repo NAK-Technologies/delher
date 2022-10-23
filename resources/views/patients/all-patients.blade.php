@@ -24,7 +24,7 @@
                               <tr>
                                    <td>{{ $loop->iteration }}</td>
                                    <td>{{ $patient->name }}</td>
-                                   <td>{{ $patient->demographic->dob }}</td>
+                                   <td>{{ \Carbon\Carbon::parse($patient->demographic->dob)->format('d-m-Y') }}</td>
                                    <td>{{ $patient->created_at->format('d-m-Y') }}</td>
                               {{-- <td><a href="{{ route('patient.show', $patient->id) }}">View</a></td> --}}
                               </tr>
