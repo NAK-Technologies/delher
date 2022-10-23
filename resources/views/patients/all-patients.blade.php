@@ -26,7 +26,7 @@
                                    <td>{{ $patient->name }}</td>
                                    <td>{{ $patient->demographic->dob }}</td>
                                    <td>{{ $patient->created_at->format('d-m-Y') }}</td>
-                              <td><a href="{{ route('patient.show', $patient->id) }}">View</a></td>
+                              {{-- <td><a href="{{ route('patient.show', $patient->id) }}">View</a></td> --}}
                               </tr>
                               @endforeach
                          </tbody>

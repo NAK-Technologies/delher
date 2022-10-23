@@ -17,13 +17,13 @@
                                         <i class="tim-icons icon-single-02"></i>
                                     </span>
                                 </label>
-                                <label class="btn btn-sm btn-info btn-simple" id="daily-types">
+                                {{-- <label class="btn btn-sm btn-info btn-simple" id="daily-types">
                                     <input type="radio" name="options">
                                     <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Types of Diarrhea</span>
                                     <span class="d-block d-sm-none">
                                         <i class="tim-icons icon-single-02"></i>
                                     </span>
-                                </label>
+                                </label> --}}
                                 </div>
                             </div>
                         </div>
@@ -178,19 +178,19 @@
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderWidth: 2,
-                            data: [53, 20, 10, 80, 100, 45],
-                            // data: patientsCountData,
+                            // data: [53, 20, 10, 80, 100, 45],
+                            data: patientsCountData,
                         }]
                 dailyChart.update();
             });
-            $('#daily-types').click(function (){
-                dailyChart.config.data.datasets = [
-                    {
-                        label: '',
-                    }
-                ]
-                dailyChart.update()
-            })
+            // $('#daily-types').click(function (){
+            //     dailyChart.config.data.datasets = [
+            //         {
+            //             label: '',
+            //         }
+            //     ]
+            //     dailyChart.update()
+            // })
             // console.log(gradientBarChartConfiguration);
         </script>    
     @endpush
