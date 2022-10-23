@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::view('/questionnaire', 'patients.index')->name('questionnaire.index');
 
 	Route::get('/patients', function () {
-		$patients = Patient::with('demographics')->get();
+		$patients = Patient::with('demographic')->get();
 		dd($patients);
 		return view('patients.all-patients', compact('patients'));
 	})->name('patients.index');
