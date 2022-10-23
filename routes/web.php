@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AnswerController;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::view('/questions', 'questions.index')->name('questions.index');
 	Route::view('/questionnaire', 'patients.index')->name('questionnaire.index');
+
+	Route::get('/patients', function () {
+		$patients = Patient::all();
+		return view('patients.all-patients', compact('patients'));
+	})->name('patients.index');
 
 	// Route::get('/user-management', )->name('user.index');
 });
