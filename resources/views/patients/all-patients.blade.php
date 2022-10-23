@@ -23,6 +23,7 @@
                     <h5 class="title">{{ _('Questions') }}</h5>
                 </div>
                <div class="card-body">
+                    @dd($patients)
                </div>
                <div class="card-footer">
                </div>
